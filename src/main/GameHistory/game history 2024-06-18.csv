@@ -1,0 +1,8 @@
+test textsesja z godziny  23:33:10: houseScore,playerScore,playerPoints,changeInPoints,playerWin
+                          ,18        ,22         ,80          ,20            ,false    ,
+sesja z godziny  23:33:35: houseScore,playerScore,playerPoints,changeInPoints,playerWin
+                          ,17        ,18         ,100         ,0             ,false    ,
+sesja z godziny  23:34:01: houseScore,playerScore,playerPoints,changeInPoints,playerWin
+                          ,21        ,21         ,100         ,0             ,false    ,
+sesja z godziny  23:34:10: houseScore,playerScore,playerPoints,changeInPoints,playerWin
+                          ,21        ,21         ,0           ,100           ,false    ,
