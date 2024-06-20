@@ -19,23 +19,22 @@ public class DeckService {
     private final Validators validators = new Validators(scanner);
     private final DeckMapper deckMapper = new DeckMapper();
 
-    public Card getCardFromDeck(Deck deck) {
+    public Card drawCardFromDeck(Deck deck) {
         List<Card> cards = deck.getCards();
-        Card card = cards.get(0);
-        cards.remove(card);
+        Card card = cards.remove(0);
         return card;
     }
 
-    private List<Card> addCardsToDeck(String responseWithCardsBody) {
+    private List<Card> parseCardsFromJsonToDeckList(String responseWithCardsBody) {
         return cardMapper.parseCardsList(responseWithCardsBody);
     }
 
-    public Deck getNewDeckIdAndFillLocalDeck() {
+    public Deck initializeNewDeckAndFillLocalDeck() {
         HttpResponse<String> responseDeckId = deckApiHandler.getShuffledDecksIdInResponseFromDeckSource(validators.enterAmountOfDeck(scanner));
         Deck deck = new Deck(deckMapper.getDeckIdFromResponseBody(responseDeckId.body()));
         deck.setRemainingCards(deckMapper.getAmountOfCardsInDeck(responseDeckId.body()));
         HttpResponse<String> responseWithCards = deckApiHandler.getCardsInResponseFromDeckSource(deck.getDeckId(), deck.getRemainingCards());
-        deck.createDeckOfCards(addCardsToDeck(responseWithCards.body()));
+        deck.createDeckOfCards(parseCardsFromJsonToDeckList(responseWithCards.body()));
         return deck;
     }
 }

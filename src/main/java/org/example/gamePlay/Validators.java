@@ -74,7 +74,7 @@ public class Validators {
             if (nickname.length() > 1) {
                 return nickname;
             } else {
-                System.out.println(" Your nickname is too short; it must be at least two characters long ");
+                throw new IllegalArgumentException(" Your nickname is too short; it must be at least two characters long ");
             }
         }
     }

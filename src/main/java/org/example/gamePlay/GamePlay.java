@@ -27,7 +27,7 @@ public class GamePlay {
     public void start() {
         while (wouldYouPlay && player.getPlayerPoints() > 0) {
             if (deck.getCards().size() < 2) {
-                deck = deckService.getNewDeckIdAndFillLocalDeck();
+                deck = deckService.initializeNewDeckAndFillLocalDeck();
             }
             promptForNewGame();
         }
@@ -36,7 +36,7 @@ public class GamePlay {
     private Deck startingPointsAndNewDeck() {
         player.setPlayerPoints(100);
         System.out.println("The player receives 100 points!");
-        return deckService.getNewDeckIdAndFillLocalDeck();
+        return deckService.initializeNewDeckAndFillLocalDeck();
     }
 
     private void promptForNewGame() {
@@ -62,7 +62,7 @@ public class GamePlay {
         boolean answer = true;
         while (answer) {
             if (deck.getCards().size() < 2) {
-                deck = deckService.getNewDeckIdAndFillLocalDeck();
+                deck = deckService.initializeNewDeckAndFillLocalDeck();
             }
             String decision = validators.makeDecisionToPlayOrPass(new Scanner(System.in));
             if (decision.equals("c")) {
@@ -88,13 +88,13 @@ public class GamePlay {
     }
 
     private void playerDrawCard() {
-        player.addCardToHand(deckService.getCardFromDeck(deck));
+        player.addCardToHand(deckService.drawCardFromDeck(deck));
         player.setScore(player.countScore(player.getHand()));
         player.showScoreMessage();
     }
 
     private void houseDrawCard() {
-        house.addCardToHand(deckService.getCardFromDeck(deck));
+        house.addCardToHand(deckService.drawCardFromDeck(deck));
         house.setScore(house.countScore(house.getHand()));
         house.showScoreMessage();
     }

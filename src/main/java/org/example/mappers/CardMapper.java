@@ -60,21 +60,21 @@ public class CardMapper {
         if (valueFromJson == null || valueFromJson.isEmpty()) {
             throw new IllegalArgumentException(" The provided file is empty or null ");
         }
-        valueFromJson = valueFromJson.toLowerCase();
-        valueFromJson = valueFromJson.trim();
-        if ("king".equals(valueFromJson) || "queen".equals(valueFromJson) || "jack".equals(valueFromJson) || "ace".equals(valueFromJson)) {
-
-            return cardValueSchema().get(valueFromJson);
-        }
-        try {
-            int numberValue = Integer.parseInt(valueFromJson.trim());
-            if (numberValue > 1 && numberValue < 11) {
-                return cardValueSchema().get(valueFromJson.trim());
+            valueFromJson = valueFromJson.toLowerCase().trim();
+            if ("king".equals(valueFromJson) || "queen".equals(valueFromJson) || "jack".equals(valueFromJson) || "ace".equals(valueFromJson)) {
+                return cardValueSchema().get(valueFromJson);
             }
-        } catch (NumberFormatException e) {
-            System.out.println(" Failed to parse the value to an integer ");
+            try {
+                int numberValue = Integer.parseInt(valueFromJson);
+                if (numberValue > 1 && numberValue < 11) {
+                    return cardValueSchema().get(valueFromJson.trim());
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(" Failed to parse the value to an integer ");
+            }
+            throw new IllegalArgumentException("Invalid values describing cards in the provided JSON");
+
         }
-        throw new IllegalArgumentException("Invalid values describing cards in the provided JSON");
-    }
+
 }
 

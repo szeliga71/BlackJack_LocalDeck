@@ -48,7 +48,7 @@ public class DeckApiHandlerTest {
     @Test
     void drawCardsIncorrectFirstArgument() {
 
-        Assertions.assertThrows(RuntimeException.class,()->handler.getCardsInResponseFromDeckSource("xxxx", 2));
+        Assertions.assertThrows(RuntimeException.class, () -> handler.getCardsInResponseFromDeckSource("xxxx", 2));
     }
 
     @Test
@@ -56,6 +56,7 @@ public class DeckApiHandlerTest {
 
         Assertions.assertThrows(RuntimeException.class, () -> handler.getCardsInResponseFromDeckSource("xxxx", 600).statusCode());
     }
+
     @Test
     void drawCardsIncorrectBothArguments1() {
 

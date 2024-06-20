@@ -9,37 +9,40 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class EnterAmountOfDeckTest {
 
     @Mock
     private Scanner scanner;
 
-    private final Validators validators=new Validators(scanner);
+    private final Validators validators = new Validators(scanner);
 
     @Test
-    void enterNumberOfDeckHappyPathTest(){
+    void enterNumberOfDeckHappyPathTest() {
         when(scanner.nextInt())
                 .thenReturn(5);
-        int expectedNumber=validators.enterAmountOfDeck(scanner);
-        int actualNumber=5;
-        Assertions.assertEquals(actualNumber,expectedNumber);
+        int expectedNumber = validators.enterAmountOfDeck(scanner);
+        int actualNumber = 5;
+        Assertions.assertEquals(actualNumber, expectedNumber);
     }
+
     @Test
-    void enterNumberOfDeckTwoTimerWrongNumberTest(){
+    void enterNumberOfDeckTwoTimerWrongNumberTest() {
         when(scanner.nextInt())
-                .thenReturn(0,18,6);
-        int expectedNumber=validators.enterAmountOfDeck(scanner);
-        int actualNumber=6;
-        Assertions.assertEquals(actualNumber,expectedNumber);
+                .thenReturn(0, 18, 6);
+        int expectedNumber = validators.enterAmountOfDeck(scanner);
+        int actualNumber = 6;
+        Assertions.assertEquals(actualNumber, expectedNumber);
     }
+
     @Test
-    void enterNumberOfDeckMismatchInputTest(){
+    void enterNumberOfDeckMismatchInputTest() {
         when(scanner.nextInt())
                 .thenThrow(new InputMismatchException())
                 .thenReturn(5);
-        int expectedNumber=validators.enterAmountOfDeck(scanner);
-        int actualNumber=5;
-        Assertions.assertEquals(actualNumber,expectedNumber);
+        int expectedNumber = validators.enterAmountOfDeck(scanner);
+        int actualNumber = 5;
+        Assertions.assertEquals(actualNumber, expectedNumber);
     }
 }
